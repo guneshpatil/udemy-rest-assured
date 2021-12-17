@@ -37,12 +37,12 @@ public class library {
 
     @Test
     public void addNewBook(){
-        String addBookResponse = given().log().all()
+        String addBookResponse = given()
                 .spec(requestSpecification)
-                .body(Payload.requestBody_addBook())
+                .body(Payload.requestBody_addBook("KGUTL", "304953"))
                 .when()
                 .post(Constants.URL_ADD_BOOK)
-                .then().log().all()
+                .then()
                 .spec(responseSpecification)
                 .extract().asString();
 

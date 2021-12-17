@@ -1,5 +1,7 @@
 package data;
 
+import org.json.JSONObject;
+
 public class Payload {
     public static String requestBody_add() {
         return """
@@ -57,13 +59,18 @@ public class Payload {
                 }""";
     }
 
-    public static String requestBody_addBook(){
-        return """
+    public static String requestBody_addBook(String isbn, String aisle){
+        //course uses string concatenation for replacing the values
+        //using JSON Object instead to avoid any bad json errors
+        JSONObject addBook = new JSONObject("""
                 {
                 "name":"Learn Appium Automation with Java",
-                "isbn":"tret",
+                "isbn":"teoeri",
                 "aisle":"292326",
                 "author":"John foer"
-                }""";
+                }""");
+        addBook.put("isbn", isbn);
+        addBook.put("aisle", aisle);
+        return addBook.toString();
     }
 }
