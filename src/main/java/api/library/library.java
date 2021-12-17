@@ -11,7 +11,11 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.client.methods.RequestBuilder;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 
@@ -35,7 +39,7 @@ public class library {
                 .build();
     }
 
-    @Test
+    @Test(dataProvider="newBooks")
     public void addNewBook(){
         String addBookResponse = given()
                 .spec(requestSpecification)
@@ -47,5 +51,14 @@ public class library {
                 .extract().asString();
 
         bookId = Helper.getField(addBookResponse, "ID");
+    }
+
+    @DataProvider(name="newBooks")
+    public Object[][] newBooksForLibrary(){
+        return new Object[][]{
+                {UUID.randomUUID().toString().split("-")[0], UUID.randomUUID().toString().split("-")[3]},
+                {UUID.randomUUID().toString().split("-")[0], UUID.randomUUID().toString().split("-")[3]},
+                {UUID.randomUUID().toString().split("-")[0], UUID.randomUUID().toString().split("-")[3]}
+        };
     }
 }
