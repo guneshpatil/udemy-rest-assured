@@ -30,7 +30,7 @@ public class library {
     ArrayList<String> bookIds;
 
     @BeforeSuite
-    public void setup(){
+    public void setup() {
         //using request specification as a common specification
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri("http://216.10.245.166")
@@ -46,18 +46,20 @@ public class library {
         bookIds = new ArrayList<>();
     }
 
-    @Test(dataProvider="newRandomBooks")
-    public void addNewBook(String isbn, String aisle){
+    @Test(dataProvider = "newRandomBooks")
+    public void addNewBook(String isbn, String aisle) {
         String addBookResponse = given()
                 .spec(requestSpecification)
                 .body(Payload.requestBody_addBook(isbn, aisle))
                 .when()
                 .post(Constants.URL_ADD_BOOK)
-                .then().log().body()
+                .then()
                 .spec(responseSpecification)
                 .extract().asString();
 
-        bookIds.add(Helper.getField(addBookResponse, "ID"));
+        String currentId = Helper.getField(addBookResponse, "ID");
+        System.out.println("Book Id added: " + currentId);
+        bookIds.add(currentId);
     }
 
     /***
@@ -65,32 +67,34 @@ public class library {
      * work fine for dataProvider = newBooks
      */
     @Test
-    public void deleteBooksList(){
-        bookIds.forEach(bookId ->
-            given().log().body()
+    public void deleteBooksList() {
+        bookIds.forEach(bookId -> {
+            System.out.println("Deleting " + bookId);
+            given()
                     .spec(requestSpecification)
                     .body((new JSONObject().put("ID", bookId)).toString())
                     .when()
                     .delete(Constants.URL_DELETE_BOOK)
-                    .then().log().body()
-                    .spec(responseSpecification));
+                    .then()
+                    .spec(responseSpecification);
+        });
     }
 
     @Ignore
     @Test(dataProvider = "newBooks")
-    public void deleteBooks(String isbn, String aisle){
-            System.out.println(given()
-                    .spec(requestSpecification)
-                    .body((new JSONObject().put("ID", isbn.concat(aisle))).toString())
-                    .when()
-                    .delete(Constants.URL_DELETE_BOOK)
-                    .then()
-                    .spec(responseSpecification)
-                    .extract().body().jsonPath().getString("msg"));
+    public void deleteBooks(String isbn, String aisle) {
+        System.out.println(given()
+                .spec(requestSpecification)
+                .body((new JSONObject().put("ID", isbn.concat(aisle))).toString())
+                .when()
+                .delete(Constants.URL_DELETE_BOOK)
+                .then()
+                .spec(responseSpecification)
+                .extract().body().jsonPath().getString("msg"));
     }
 
-    @DataProvider(name="newBooks")
-    public Object[][] newBooksForLibrary(){
+    @DataProvider(name = "newBooks")
+    public Object[][] newBooksForLibrary() {
         return new Object[][]{
                 {"HGTKDS", "77593380"},
                 {"HGTKDS", "77593381"},
@@ -98,8 +102,8 @@ public class library {
         };
     }
 
-    @DataProvider(name="newRandomBooks")
-    public Object[][] newRandomBooksForLibrary(){
+    @DataProvider(name = "newRandomBooks")
+    public Object[][] newRandomBooksForLibrary() {
         String aisle = String.valueOf(Math.abs(UUID.randomUUID().getLeastSignificantBits()));
         aisle = aisle.substring(aisle.length() - 8);
         return new Object[][]{
