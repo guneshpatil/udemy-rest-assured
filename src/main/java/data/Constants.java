@@ -9,4 +9,5 @@ public class Constants {
     public static final String NEW_ADDRESS = "1190 Sadashiv";
 
     public static final String URL_ADD_BOOK = "/Library/Addbook.php";
+    public static final String URL_DELETE_BOOK = "/Library/DeleteBook.php";
 }
