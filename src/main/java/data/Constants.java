@@ -7,4 +7,6 @@ public class Constants {
     public static final String URL_UPDATE_PLACE = "/maps/api/place/update/json";
     public static final String URL_GET_PLACE = "/maps/api/place/get/json";
     public static final String NEW_ADDRESS = "1190 Sadashiv";
+
+    public static final String URL_ADD_BOOK = "/Library/Addbook.php";
 }
