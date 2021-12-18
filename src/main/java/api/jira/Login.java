@@ -17,7 +17,7 @@ public class Login extends RASpecs {
                 .body(LoginDetails.requestBody_authenticate())
                 .when()
                 .filter(sessionFilter)
-                .post(Constants.URL_COOKIE_LOGIN)
+                .post(Constants.URL_JIRA_COOKIE_LOGIN)
                 .then().spec(responseSpecs);
     }
 }

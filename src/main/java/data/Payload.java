@@ -77,7 +77,7 @@ public class Payload {
     public static String requestBody_addComment() {
         return """
                     {
-                    "body": "This is the first comment!",
+                    "body": "This is the comment with COMMENT_ID!",
                     "visibility": {
                         "type": "role",
                         "value": "Administrators"
