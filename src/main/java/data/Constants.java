@@ -10,4 +10,7 @@ public class Constants {
 
     public static final String URL_ADD_BOOK = "/Library/Addbook.php";
     public static final String URL_DELETE_BOOK = "/Library/DeleteBook.php";
+
+    public static final String URL_ADD_COMMENT = "/rest/api/2/issue/{issueId}/comment";
+    public static final String URL_COOKIE_LOGIN = "/rest/auth/1/session";
 }

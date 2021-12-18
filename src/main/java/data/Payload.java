@@ -23,7 +23,7 @@ public class Payload {
                 }""";
     }
 
-    public static String requestBody_updateWithNewAddress(){
+    public static String requestBody_updateWithNewAddress() {
         return """
                 {
                     "place_id": "70102fbe26b563f16c2667b78a5c6ba7",
@@ -32,7 +32,7 @@ public class Payload {
                 }""";
     }
 
-    public static String response_courseDetails(){
+    public static String response_courseDetails() {
         return """
                 {
                    "dashboard":{
@@ -59,7 +59,7 @@ public class Payload {
                 }""";
     }
 
-    public static String requestBody_addBook(String isbn, String aisle){
+    public static String requestBody_addBook(String isbn, String aisle) {
         //course uses string concatenation for replacing the values
         //using JSON Object instead to avoid any bad json errors
         JSONObject addBook = new JSONObject("""
@@ -73,4 +73,17 @@ public class Payload {
         addBook.put("aisle", aisle);
         return addBook.toString();
     }
+
+    public static String requestBody_addComment() {
+        return """
+                    {
+                    "body": "This is the first comment!",
+                    "visibility": {
+                        "type": "role",
+                        "value": "Administrators"
+                    }
+                }
+                                """;
+    }
+
 }
