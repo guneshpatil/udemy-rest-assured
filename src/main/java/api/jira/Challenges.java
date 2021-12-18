@@ -4,6 +4,7 @@ import data.Constants;
 import data.Payload;
 import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -23,7 +24,7 @@ public class Challenges {
     }
 
     @Test
-    public void addComment() {
+    public void a_addComment() {
         given().spec(jiraLogin.requestSpecs)
                 .pathParam("issueId", "10002")
                 .body(Payload.requestBody_addComment().replace("COMMENT_ID", UUID.randomUUID().toString()))
@@ -35,8 +36,9 @@ public class Challenges {
                 .extract().asString();
     }
 
+    @Ignore
     @Test
-    public void addAttachement() throws URISyntaxException {
+    public void b_addAttachment() throws URISyntaxException {
         given().spec(jiraLogin.requestSpecs)
                 .pathParam("issueId", "10002")
                 .header("X-Atlassian-Token", "no-check")
@@ -49,4 +51,14 @@ public class Challenges {
                 .spec(jiraLogin.responseSpecs);
     }
 
+    @Test
+    public void c_getIssueDetails(){
+        given().spec(jiraLogin.requestSpecs)
+                .pathParam("issueId", "10002")
+                .filter(jiraLogin.sessionFilter)
+                .when()
+                .get(Constants.URL_JIRA_GET_ISSUE_DETAILS)
+                .then().log().body()
+                .spec(jiraLogin.responseSpecs);
+    }
 }
