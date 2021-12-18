@@ -1,6 +1,6 @@
 package api.library;
 
-import api.RestAssuredSpecification;
+import api.RASpecs;
 import api.map.Helper;
 import data.Constants;
 import data.Payload;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 
-public class library extends RestAssuredSpecification {
+public class library extends RASpecs {
     ArrayList<String> bookIds;
 
     public library() {
@@ -43,10 +43,6 @@ public class library extends RestAssuredSpecification {
         bookIds.add(currentId);
     }
 
-    /***
-     * fails only when dataProvider = newRandomBooks
-     * work fine for dataProvider = newBooks
-     */
     @Test
     public void deleteBooksList() {
         bookIds.forEach(bookId -> {

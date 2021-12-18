@@ -2,18 +2,18 @@ package api;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.session.SessionFilter;
 import io.restassured.http.ContentType;
-import io.restassured.http.Cookie;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-public class RestAssuredSpecification {
+public class RASpecs {
     public RequestSpecification requestSpecs;
     public ResponseSpecification responseSpecs;
     public ResponseSpecification createdStatusSpecs;
-    public Cookie cookie;
+    public SessionFilter sessionFilter = new SessionFilter();
 
-    public RestAssuredSpecification(String baseUri) {
+    public RASpecs(String baseUri) {
         //using request specification as a common specification
         requestSpecs = new RequestSpecBuilder()
                 .setBaseUri(baseUri)

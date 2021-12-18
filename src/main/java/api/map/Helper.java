@@ -3,7 +3,6 @@ package api.map;
 import data.Constants;
 import io.restassured.path.json.JsonPath;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class Helper {
                 .extract().asString();
     }
 
-    public static String getPlace(HashMap<String, String> queryParams){
+    public static String getPlace(HashMap<String, String> queryParams) {
         return given().queryParams(queryParams)
                 .header("Content-Type", "application/json")
                 .when()
@@ -43,11 +42,11 @@ public class Helper {
                 .extract().asString();
     }
 
-    public static <T> T getField(String response, String fieldPath){
+    public static <T> T getField(String response, String fieldPath) {
         return ((T) new JsonPath(response).get(fieldPath));
     }
 
-    public static <T> List<T> getCollection(String response, String path){
+    public static <T> List<T> getCollection(String response, String path) {
         return new JsonPath(response).getList(path);
     }
 }

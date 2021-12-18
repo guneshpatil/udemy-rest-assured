@@ -8,8 +8,6 @@ import org.testng.Assert;
 
 import java.util.HashMap;
 
-import static io.restassured.RestAssured.given;
-
 public class Basics {
 
     private static String place_id;

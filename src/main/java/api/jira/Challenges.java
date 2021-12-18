@@ -11,16 +11,16 @@ public class Challenges {
     Login jiraLogin = new Login();
 
     @BeforeSuite
-    public void setup(){
+    public void setup() {
         jiraLogin.getSessionId();
     }
 
     @Test
-    public void addComment(){
+    public void addComment() {
         given().spec(jiraLogin.requestSpecs)
                 .pathParam("issueId", "10002")
                 .body(Payload.requestBody_addComment())
-                .cookie(jiraLogin.cookie)
+                .filter(jiraLogin.sessionFilter)
                 .when()
                 .post(Constants.URL_ADD_COMMENT)
                 .then()
