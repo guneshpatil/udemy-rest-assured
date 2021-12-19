@@ -18,6 +18,7 @@ import java.util.UUID;
 
 import static api.map.Helper.getCollection;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class Challenges {
     Login jiraLogin = new Login();
@@ -66,8 +67,11 @@ public class Challenges {
                 .get(Constants.URL_JIRA_GET_ISSUE_DETAILS)
                 .then()
                 .spec(jiraLogin.responseSpecs)
+                .assertThat()
+                .body("fields.comment.comments.id", hasItem(commentId))
                 .extract().response().asString();
 
+        //another way of validating a particular value in an array by iterating
         ArrayList<String> commentsIds = new ArrayList<>(Helper.getCollection(response, "fields.comment.comments.id"));
         Assert.assertTrue(commentsIds.contains(commentId));
     }
