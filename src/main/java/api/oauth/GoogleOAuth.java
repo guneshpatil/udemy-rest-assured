@@ -2,6 +2,7 @@ package api.oauth;
 
 import data.Constants;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static api.oauth.OAuthHelper.getTokenOAuthParams;
@@ -11,6 +12,7 @@ public class GoogleOAuth {
 
     private String access_token, auth_code;
 
+    @Ignore
     @BeforeSuite
     public void getCode() {
 //        System.setProperty("webdriver.chrome.driver", "C:/Users/IBMADMIN/code/chromedriver.exe");

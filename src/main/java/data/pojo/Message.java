@@ -1,4 +1,4 @@
-package api.pojo;
+package data.pojo;
 
 public class Message {
     private String message;
