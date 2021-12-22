@@ -1,5 +1,6 @@
 package api;
 
+import data.Constants;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.session.SessionFilter;
@@ -8,7 +9,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 public class RASpecs {
-    public RequestSpecification requestSpecs;
+    public RequestSpecification requestSpecs, mapsRequestSpecs;
     public ResponseSpecification responseSpecs;
     public ResponseSpecification createdStatusSpecs;
     public SessionFilter sessionFilter = new SessionFilter();
@@ -29,6 +30,15 @@ public class RASpecs {
         createdStatusSpecs = new ResponseSpecBuilder()
                 .expectStatusCode(201)
                 .expectContentType(ContentType.JSON)
+                .build();
+    }
+
+    public RequestSpecification buildMapsSpecs(String baseUri){
+        //using request specification as a common specification
+        return new RequestSpecBuilder()
+                .setBaseUri(baseUri)
+                .addQueryParam("key", Constants.KEY_TEXT)
+                .setContentType(ContentType.JSON)
                 .build();
     }
 }
