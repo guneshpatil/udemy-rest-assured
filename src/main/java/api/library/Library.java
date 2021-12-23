@@ -15,10 +15,10 @@ import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 
-public class library extends RASpecs {
+public class Library extends RASpecs {
     ArrayList<String> bookIds;
 
-    public library() {
+    public Library() {
         super("http://216.10.245.166");
     }
 
