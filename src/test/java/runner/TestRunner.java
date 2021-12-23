@@ -12,12 +12,12 @@ import static io.restassured.RestAssured.given;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/java/features",
-        glue = "stepDefinitions"
+        glue = "stepDefinitions",
+        tags = "@Maps"
 )
 
 public class TestRunner {
     @Before
     public void restAssuredSetup(){
-        given().spec(RASpecs.buildMapsSpecs(Constants.RSA_WEBSITE));
     }
 }

@@ -4,6 +4,7 @@ import api.RASpecs;
 import api.map.pojo.AddPlace;
 import api.map.pojo.Location;
 import data.Constants;
+import org.json.JSONObject;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -49,11 +50,11 @@ public class MapWithPojo extends RASpecs {
 
     @Test
     public void getNewPlace() {
-        AddPlace currentPlace = given().spec(buildMapsSpecs(Constants.RSA_WEBSITE))
+        String currentPlace = given().spec(buildMapsSpecs(Constants.RSA_WEBSITE))
                 .queryParams("place_id", currentLocationId)
                 .when().get(Constants.URL_GET_PLACE).then().log().all()
-                .extract().as(AddPlace.class);
+                .extract().asString();
 
-        System.out.println(currentPlace.getName());
+        System.out.println(new JSONObject(currentPlace).get("name"));
     }
 }
