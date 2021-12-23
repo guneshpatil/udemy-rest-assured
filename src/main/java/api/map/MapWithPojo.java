@@ -17,7 +17,6 @@ import static io.restassured.RestAssured.given;
 
 public class MapWithPojo extends RASpecs {
     private AddPlace addPlacePayload;
-    private static HashMap<String, String> queryParams = new HashMap<>();
     private String currentLocationId;
 
     public MapWithPojo() {
