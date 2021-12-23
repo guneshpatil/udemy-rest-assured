@@ -1,35 +1,31 @@
 package stepDefinitions;
 
-import api.RASpecs;
+import api.map.MapWithPojo;
+import api.map.pojo.AddPlace;
 import data.Constants;
-import data.Payload;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-import org.json.JSONObject;
 import org.junit.Assert;
-
-import java.util.UUID;
+import utils.SharedMapSteps;
 
 import static io.restassured.RestAssured.given;
 
-public class MapSteps {
-    JSONObject addPlace_payload;
+public class MapSteps extends SharedMapSteps {
+    AddPlace addPlace_payload;
     Response response;
 
     @Given("New place information is available")
     public void newPlaceInformationIsAvailable() {
-        addPlace_payload = new JSONObject(Payload.requestBody_add());
-        String name = addPlace_payload.getString("name");
-        addPlace_payload.put("name", name + " " + UUID.randomUUID());
+        addPlace_payload = MapWithPojo.getNewPayload();
     }
 
     @When("User calls {string} with Post call")
     public void userCallsWith(String arg0) {
-        response = given().spec(RASpecs.buildMapsSpecs(Constants.RSA_WEBSITE))
-                .body(addPlace_payload.toString())
+        response = given().spec(getRequestSpecs())
+                .body(addPlace_payload)
                 .when()
                 .post(Constants.URL_ADD_PLACE)
                 .then().log().all()

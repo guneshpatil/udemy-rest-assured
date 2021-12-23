@@ -57,4 +57,20 @@ public class MapWithPojo extends RASpecs {
 
         System.out.println(new JSONObject(currentPlace).get("name"));
     }
+
+    public static AddPlace getNewPayload() {
+        AddPlace addPlacePayload = new AddPlace();
+        addPlacePayload.setName("POJO Location #" + UUID.randomUUID());
+        addPlacePayload.setAddress("49, Sunset Drive");
+        addPlacePayload.setAccuracy(23);
+        addPlacePayload.setLanguage("Marathi");
+        addPlacePayload.setLocation(new Location(23.4395038, -54.959604968));
+        addPlacePayload.setPhoneNumber("+91 437593489");
+        List<String> types = new ArrayList<>();
+        types.add("Fiction");
+        types.add("Work");
+        addPlacePayload.setTypes(types);
+        addPlacePayload.setWebsite("https://www.endgame.com");
+        return addPlacePayload;
+    }
 }

@@ -41,4 +41,20 @@ public class RASpecs {
                 .setContentType(ContentType.JSON)
                 .build();
     }
+
+    public static RequestSpecification buildMapsSpecs() {
+        //using request specification as a common specification
+        return new RequestSpecBuilder()
+                .addQueryParam("key", Constants.KEY_TEXT)
+                .setContentType(ContentType.JSON)
+                .build();
+    }
+
+    public static ResponseSpecification getResponseSpecs() {
+        //using response specification as a common specification
+        return new ResponseSpecBuilder()
+                .expectStatusCode(200)
+                .expectContentType(ContentType.JSON)
+                .build();
+    }
 }

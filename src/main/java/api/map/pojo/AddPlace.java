@@ -74,7 +74,6 @@ public class AddPlace {
     }
 
     public List<String> getTypes() {
-        System.out.println(Types);
         return Types;
     }
 
