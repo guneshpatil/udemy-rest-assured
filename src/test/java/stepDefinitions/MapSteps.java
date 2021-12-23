@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.junit.Assert;
+import utils.MapApiResources;
 import utils.SharedMapSteps;
 
 import java.io.FileNotFoundException;
@@ -27,11 +28,11 @@ public class MapSteps extends SharedMapSteps {
     @When("User calls {string} with Post call")
     public void userCallsWith(String methodName) throws FileNotFoundException {
         switch (methodName) {
-            case "AddPlaceAPI":
+            case "AddPlaceUrl":
                 response = given().spec(getRequestSpecs())
                         .body(addPlace_payload)
                         .when()
-                        .post(Constants.URL_ADD_PLACE)
+                        .post(MapApiResources.valueOf(methodName).getResource())
                         .then()
                         .extract().response();
                 break;
