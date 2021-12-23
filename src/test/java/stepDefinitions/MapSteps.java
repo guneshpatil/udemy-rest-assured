@@ -11,6 +11,8 @@ import io.restassured.response.Response;
 import org.junit.Assert;
 import utils.SharedMapSteps;
 
+import java.io.FileNotFoundException;
+
 import static io.restassured.RestAssured.given;
 
 public class MapSteps extends SharedMapSteps {
@@ -23,13 +25,19 @@ public class MapSteps extends SharedMapSteps {
     }
 
     @When("User calls {string} with Post call")
-    public void userCallsWith(String arg0) {
-        response = given().spec(getRequestSpecs())
-                .body(addPlace_payload)
-                .when()
-                .post(Constants.URL_ADD_PLACE)
-                .then().log().all()
-                .extract().response();
+    public void userCallsWith(String methodName) throws FileNotFoundException {
+        switch (methodName) {
+            case "AddPlaceAPI":
+                response = given().spec(getRequestSpecs())
+                        .body(addPlace_payload)
+                        .when()
+                        .post(Constants.URL_ADD_PLACE)
+                        .then()
+                        .extract().response();
+                break;
+            case "deletePlaceAPI":
+                break;
+        }
     }
 
     @Then("the API call responds with code {int}")
@@ -42,5 +50,14 @@ public class MapSteps extends SharedMapSteps {
         Assert.assertEquals(
                 response.jsonPath().getString(field),
                 value);
+    }
+
+    @And("{string} is {string}")
+    public void is(String fieldName, String value) {
+        switch (fieldName) {
+            case "name" -> addPlace_payload.setName(value);
+            case "address" -> addPlace_payload.setAddress(value);
+            case "language" -> addPlace_payload.setLanguage(value);
+        }
     }
 }
