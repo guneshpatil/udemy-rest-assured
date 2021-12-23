@@ -7,37 +7,36 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 import utils.MapApiResources;
 import utils.SharedMapSteps;
 
 import java.io.FileNotFoundException;
+import java.util.Locale;
 
 import static io.restassured.RestAssured.given;
 
 public class MapSteps extends SharedMapSteps {
     AddPlace addPlace_payload;
     Response response;
+    RequestSpecification currentRequest;
 
     @Given("New place information is available")
-    public void newPlaceInformationIsAvailable() {
+    public void newPlaceInformationIsAvailable() throws FileNotFoundException {
         addPlace_payload = MapWithPojo.getNewPayload();
+        currentRequest = given().spec(getRequestSpecs()).body(addPlace_payload);
     }
 
-    @When("User calls {string} with Post call")
-    public void userCallsWith(String methodName) throws FileNotFoundException {
-        switch (methodName) {
-            case "AddPlaceUrl":
-                response = given().spec(getRequestSpecs())
-                        .body(addPlace_payload)
-                        .when()
-                        .post(MapApiResources.valueOf(methodName).getResource())
-                        .then()
-                        .extract().response();
-                break;
-            case "deletePlaceAPI":
-                break;
+    @When("User calls {string} with {string} call")
+    public void userCallsWith(String methodName, String methodType) {
+        switch (methodType.toUpperCase()) {
+            case "POST" -> response = currentRequest.when()
+                    .post(MapApiResources.valueOf(methodName).getResource());
+            case "GET" -> response = currentRequest.when()
+                    .get(MapApiResources.valueOf(methodName).getResource());
         }
     }
 
