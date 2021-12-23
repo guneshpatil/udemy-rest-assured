@@ -33,7 +33,7 @@ public class RASpecs {
                 .build();
     }
 
-    public RequestSpecification buildMapsSpecs(String baseUri){
+    public RequestSpecification buildMapsSpecs(String baseUri) {
         //using request specification as a common specification
         return new RequestSpecBuilder()
                 .setBaseUri(baseUri)

@@ -8,8 +8,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +22,7 @@ public class MapWithPojo extends RASpecs {
     }
 
     @BeforeSuite
-    public void setup(){
+    public void setup() {
         addPlacePayload = new AddPlace();
         addPlacePayload.setName("POJO Location #" + UUID.randomUUID());
         addPlacePayload.setAddress("49, Sunset Drive");
@@ -40,7 +38,7 @@ public class MapWithPojo extends RASpecs {
     }
 
     @Test
-    public void addNewPlace(){
+    public void addNewPlace() {
         currentLocationId = given().spec(buildMapsSpecs(Constants.RSA_WEBSITE))
                 .body(addPlacePayload)
                 .when().post(Constants.URL_ADD_PLACE)
@@ -50,7 +48,7 @@ public class MapWithPojo extends RASpecs {
     }
 
     @Test
-    public void getNewPlace(){
+    public void getNewPlace() {
         AddPlace currentPlace = given().spec(buildMapsSpecs(Constants.RSA_WEBSITE))
                 .queryParams("place_id", currentLocationId)
                 .when().get(Constants.URL_GET_PLACE).then().log().all()

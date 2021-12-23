@@ -11,14 +11,12 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
-import static api.map.Helper.getCollection;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItem;
 
 public class Challenges {
     Login jiraLogin = new Login();
@@ -58,7 +56,7 @@ public class Challenges {
     }
 
     @Test
-    public void c_getIssueDetails(){
+    public void c_getIssueDetails() {
         String response = given().spec(jiraLogin.requestSpecs)
                 .pathParam("issueId", "10002")
                 .queryParam("fields", "comment,issuetype")
