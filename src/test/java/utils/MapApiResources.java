@@ -6,7 +6,8 @@ public enum MapApiResources {
 
     AddPlaceUrl(Constants.URL_ADD_PLACE),
     GetPlaceUrl(Constants.URL_GET_PLACE),
-    UpdatePlaceUrl(Constants.URL_UPDATE_PLACE);
+    UpdatePlaceUrl(Constants.URL_UPDATE_PLACE),
+    DeletePlaceUrl("/maps/api/place/delete/json");
 
     private String resource;
 

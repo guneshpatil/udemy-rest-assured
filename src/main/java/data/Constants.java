@@ -20,4 +20,5 @@ public class Constants {
     public static final String URL_GOOGLE_AUTH = "https://accounts.google.com/o/oauth2/v2/auth";
     public static final String URL_GOOGLE_TOKEN = "https://www.googleapis.com/oauth2/v4/token";
 
+    public static final String PLACE_ID = "place_id";
 }

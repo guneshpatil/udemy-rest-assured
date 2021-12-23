@@ -10,7 +10,6 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import javax.print.PrintService;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -18,7 +17,7 @@ import java.util.Objects;
 
 public class RASpecs {
     public RequestSpecification requestSpecs;
-    public static RequestSpecification  loggingRequestSpecs;
+    public static RequestSpecification loggingRequestSpecs;
     public ResponseSpecification responseSpecs;
     public ResponseSpecification createdStatusSpecs;
     public SessionFilter sessionFilter = new SessionFilter();
@@ -70,8 +69,9 @@ public class RASpecs {
                     .addFilter(ResponseLoggingFilter.logResponseTo(log))
                     .build();
         }
-         return loggingRequestSpecs;
+        return loggingRequestSpecs;
     }
+
     public static ResponseSpecification getResponseSpecs() {
         //using response specification as a common specification
         return new ResponseSpecBuilder()
