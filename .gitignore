@@ -1,4 +1,4 @@
 /.idea/
 /target/
-/src/main/java/data/LoginDetails.java
+/src/test/java/data/LoginDetails.java
 /logging.txt
